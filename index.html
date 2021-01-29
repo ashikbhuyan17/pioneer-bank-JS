@@ -67,11 +67,11 @@
 
     <script>
         // login button event handle
-        var loginBtn = document.getElementById('login').addEventListener('click', function () {
+        document.getElementById('login').addEventListener('click', function () {
             console.log('click maro aro jure jure');
             document.getElementById('login-area').style.display = 'none';
-            const transactionArea = document.getElementById('transaction-area')
-            transactionArea.style.display = 'block';
+            const transactionArea = document.getElementById('transaction-area').style.display = 'block';
+            // transactionArea.style.display = 'block';
 
         })
 
@@ -84,7 +84,7 @@
             const depositNumber = parseFloat(amountOfDeposit)
 
 
-            // input cara onno elements value nite hbe innerText or innerHtml 
+            // input cara onno elements value nite hole use krbo innerText or innerHtml 
             const currentDeposit = document.getElementById('currentDeposit').innerText
             const currentDepositNumber = parseFloat(currentDeposit)
             const totalDeposit = depositNumber + currentDepositNumber

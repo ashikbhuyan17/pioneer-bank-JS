@@ -50,7 +50,8 @@
                     <h4>Deposit</h4>
                     <input id="depositAmount" type="text" class="form-control"
                         placeholder="$ amount you want to deposit"><br>
-                    <button id="addDeposit" class="btn btn-success">Deposit</button>
+                    <button id="addDeposit" onclick="updateDeposit('totalBalance'),updateDeposit('currentDeposit')"
+                        class="btn btn-success">Deposit</button>
                 </div>
             </div>
             <div class="col-md-6">
@@ -58,12 +59,19 @@
                     <h4>Withdraw</h4>
                     <input id="amountWithdraw" type="text" class="form-control"
                         placeholder="$ amount you want to withdraw"><br>
-                    <button id="subWithdraw" class="btn btn-success">Withdraw</button>
+                    <button id="subWithdraw"
+                        onclick="updateWithdraw('currentWithdraw',true),updateWithdraw('totalBalance',false) "
+                        class="btn btn-success">Withdraw</button>
                 </div>
             </div>
         </div>
+        <div class="container py-5">
+            <h1>Total = <span id="totalAmount">$00</span></h1>
+        </div>
 
     </div>
+
+
 
     <script>
         // login button event handle
@@ -78,47 +86,53 @@
 
         // deposit button event handle
 
-        document.getElementById('addDeposit').addEventListener('click', function () {
+        // document.getElementById('addDeposit').addEventListener('click', function () {
+
+        //     updateSpanText('currentDeposit')
+        //     updateSpanText('totalBalance')
+
+        // })
+
+        function updateDeposit(id) {
             // input value nite hole value diye nite hbe
             const amountOfDeposit = document.getElementById('depositAmount').value;
             const depositNumber = parseFloat(amountOfDeposit)
-
-            updateSpanText('currentDeposit', depositNumber)
-            updateSpanText('totalBalance', depositNumber)
-            document.getElementById('depositAmount').value = "";
-        })
-
-        function updateSpanText(id, depositNumber) {
             const currentDeposit = document.getElementById(id).innerText
             const currentDepositNumber = parseFloat(currentDeposit)
             const totalDeposit = depositNumber + currentDepositNumber
+            // document.getElementById('depositAmount').value = "";
             document.getElementById(id).innerText = totalDeposit
+            total()
+
+
         }
 
-        document.getElementById('subWithdraw').addEventListener('click', function () {
+        // document.getElementById('subWithdraw').addEventListener('click', function () {
+        //     updateWithdraw('currentWithdraw', true)
+        //     updateWithdraw('totalBalance', false)
 
-            // balance withdraw
+
+        // })
+
+        function updateWithdraw(id, inIncrease) {
             const amountWithdraw = document.getElementById('amountWithdraw').value
             const amountWithdrawNumber = parseFloat(amountWithdraw)
-            console.log(amountWithdrawNumber);
-
-            updateWithdraw('currentWithdraw', amountWithdrawNumber, true)
-            updateWithdraw('totalBalance', amountWithdrawNumber, false)
-            document.getElementById('amountWithdraw').value = "";
-
-        })
-
-        function updateWithdraw(id, amountWithdrawNumber, inIncrease) {
             const currentWithdraw = document.getElementById(id).innerText
             const currentWithdrawNumber = parseFloat(currentWithdraw)
-            console.log(typeof currentWithdrawNumber);
             let totalWithdraw = 0
             if (inIncrease == false) {
                 totalWithdraw = currentWithdrawNumber - amountWithdrawNumber
             } else {
                 totalWithdraw = currentWithdrawNumber + amountWithdrawNumber
             }
+            // document.getElementById('amountWithdraw').value = ""
             document.getElementById(id).innerText = totalWithdraw
+            total()
+        }
+
+        function total() {
+            const i = document.getElementById('totalBalance').innerText
+            document.getElementById('totalAmount').innerText = i
 
         }
 
